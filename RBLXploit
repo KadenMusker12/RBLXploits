@@ -1,0 +1,1818 @@
+if game.PlaceId == 13822889 then
+    local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+    local Window = Library.CreateLib("RBLXploits - Lumber Tycoon 2", "BloodTheme")
+    
+    --Main--
+
+    local Tab = Window:NewTab("Main")
+    local PlayerSection = Tab:NewSection("Welcome To RBLXploits - Hub")
+    PlayerSection:NewLabel("Enjoy")
+    PlayerSection:NewButton("Boost FPS", "Boosts FPS For Bad PC", function()
+        local decalsyeeted = true 
+local g = game
+local w = g.Workspace
+local l = g.Lighting
+local t = w.Terrain
+t.WaterWaveSize = 0
+t.WaterWaveSpeed = 0
+t.WaterReflectance = 0
+t.WaterTransparency = 0
+l.GlobalShadows = false
+l.FogEnd = 9e9
+l.Brightness = 0
+settings().Rendering.QualityLevel = "Level01"
+for i,v in pairs(g:GetDescendants()) do
+    if v:IsA("Part") or v:IsA("Union") or v:IsA("MeshPart") then
+        v.Material = "Plastic"
+v.Reflectance = 0
+elseif v:IsA("Decal") and decalsyeeted then 
+v.Transparency = 1
+elseif v:IsA("ParticleEmitter") or v:IsA("Trail") then 
+v.Lifetime = NumberRange.new(0)
+    end
+end
+    end)
+    PlayerSection:NewButton("Reset Character", "Kills YOU", function()
+        game.Players.LocalPlayer.Character.Head:Destroy()
+    end)
+    PlayerSection:NewButton("Rejoin Server", "Joins The Same Server You Are In", function()
+        wait(1) game:GetService("TeleportService"):Teleport(13822889, LocalPlayer)
+    end)
+
+
+     --Player--
+
+    local Tab = Window:NewTab("Player")
+    local PlayerSection = Tab:NewSection("Player")
+    PlayerSection:NewButton("WalkSpeed - (X)", "Changes The WalkSpeed - Press X",  function() 
+        local walkspeedplayer = game:GetService("Players").LocalPlayer
+	local walkspeedmouse = walkspeedplayer:GetMouse()
+ 
+	local walkspeedenabled = false
+ 
+	function x_walkspeed(key)
+		if (key == "x") then
+			if walkspeedenabled == false then
+				_G.WS = 200;
+				local Humanoid = game:GetService("Players").LocalPlayer.Character.Humanoid;
+				Humanoid:GetPropertyChangedSignal("WalkSpeed"):Connect(function()
+				Humanoid.WalkSpeed = _G.WS;
+				end)
+				Humanoid.WalkSpeed = _G.WS;
+ 
+				walkspeedenabled = true
+			elseif walkspeedenabled == true then
+				_G.WS = 20;
+				local Humanoid = game:GetService("Players").LocalPlayer.Character.Humanoid;
+				Humanoid:GetPropertyChangedSignal("WalkSpeed"):Connect(function()
+				Humanoid.WalkSpeed = _G.WS;
+				end)
+				Humanoid.WalkSpeed = _G.WS;
+ 
+				walkspeedenabled = false
+			end
+		end
+	end
+ 
+	walkspeedmouse.KeyDown:connect(x_walkspeed)
+    end)
+    PlayerSection:NewSlider("JumpPower", "Changes The JumpPower", 250, 50, function(v) 
+        game.Players.LocalPlayer.Character.Humanoid.JumpPower = v
+    end)
+    PlayerSection:NewButton("Fly - (Q)", "Press Q To Fly", function()
+        repeat wait() 
+	until game.Players.LocalPlayer and game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:findFirstChild("Torso") and game.Players.LocalPlayer.Character:findFirstChild("Humanoid") 
+local mouse = game.Players.LocalPlayer:GetMouse() 
+repeat wait() until mouse
+local plr = game.Players.LocalPlayer 
+local torso = plr.Character.Torso 
+local flying = true
+local deb = true 
+local ctrl = {f = 0, b = 0, l = 0, r = 0} 
+local lastctrl = {f = 0, b = 0, l = 0, r = 0} 
+local maxspeed = 250
+local speed = 25
+ 
+function Fly() 
+local bg = Instance.new("BodyGyro", torso) 
+bg.P = 9e4 
+bg.maxTorque = Vector3.new(9e9, 9e9, 9e9) 
+bg.cframe = torso.CFrame 
+local bv = Instance.new("BodyVelocity", torso) 
+bv.velocity = Vector3.new(0,0.1,0) 
+bv.maxForce = Vector3.new(9e9, 9e9, 9e9) 
+repeat wait() 
+plr.Character.Humanoid.PlatformStand = true 
+if ctrl.l + ctrl.r ~= 0 or ctrl.f + ctrl.b ~= 0 then 
+speed = speed+.5+(speed/maxspeed) 
+if speed > maxspeed then 
+speed = maxspeed 
+end 
+elseif not (ctrl.l + ctrl.r ~= 0 or ctrl.f + ctrl.b ~= 0) and speed ~= 0 then 
+speed = speed-1 
+if speed < 0 then 
+speed = 0 
+end 
+end 
+if (ctrl.l + ctrl.r) ~= 0 or (ctrl.f + ctrl.b) ~= 0 then 
+bv.velocity = ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector * (ctrl.f+ctrl.b)) + ((game.Workspace.CurrentCamera.CoordinateFrame * CFrame.new(ctrl.l+ctrl.r,(ctrl.f+ctrl.b)*.2,0).p) - game.Workspace.CurrentCamera.CoordinateFrame.p))*speed 
+lastctrl = {f = ctrl.f, b = ctrl.b, l = ctrl.l, r = ctrl.r} 
+elseif (ctrl.l + ctrl.r) == 0 and (ctrl.f + ctrl.b) == 0 and speed ~= 0 then 
+bv.velocity = ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector * (lastctrl.f+lastctrl.b)) + ((game.Workspace.CurrentCamera.CoordinateFrame * CFrame.new(lastctrl.l+lastctrl.r,(lastctrl.f+lastctrl.b)*.2,0).p) - game.Workspace.CurrentCamera.CoordinateFrame.p))*speed 
+else 
+bv.velocity = Vector3.new(0,0.1,0) 
+end 
+bg.cframe = game.Workspace.CurrentCamera.CoordinateFrame * CFrame.Angles(-math.rad((ctrl.f+ctrl.b)*50*speed/maxspeed),0,0) 
+until not flying 
+ctrl = {f = 0, b = 0, l = 0, r = 0} 
+lastctrl = {f = 0, b = 0, l = 0, r = 0} 
+speed = 0 
+bg:Destroy() 
+bv:Destroy() 
+plr.Character.Humanoid.PlatformStand = false 
+end 
+mouse.KeyDown:connect(function(key) 
+if key:lower() == "q" then 
+if flying then flying = false 
+else 
+flying = true 
+Fly() 
+end 
+elseif key:lower() == "w" then 
+ctrl.f = 1 
+elseif key:lower() == "s" then 
+ctrl.b = -1 
+elseif key:lower() == "a" then 
+ctrl.l = -1 
+elseif key:lower() == "d" then 
+ctrl.r = 1 
+end 
+end) 
+mouse.KeyUp:connect(function(key) 
+if key:lower() == "w" then 
+ctrl.f = 0 
+elseif key:lower() == "s" then 
+ctrl.b = 0 
+elseif key:lower() == "a" then 
+ctrl.l = 0 
+elseif key:lower() == "d" then 
+ctrl.r = 0 
+end 
+end)
+Fly()
+    end)
+    PlayerSection:NewButton("Infinite Jump", "Tap Or Hold SpaceBar To Jump", function()
+        game:GetService("UserInputService").JumpRequest:connect(function()
+            game:GetService"Players".LocalPlayer.Character:FindFirstChildOfClass'Humanoid':ChangeState("Jumping")		
+        end)
+    end)
+
+
+    --Dupe--
+    local Tab = Window:NewTab("Dupe")
+    local PlayerSection = Tab:NewSection("Auto Dupe")
+    PlayerSection:NewButton("Dupe Base", "Click This And Move Ur Stuff - Load Slot", function()
+        if game.ReplicatedStorage.Transactions:FindFirstChild("AddLog") then 
+            game.ReplicatedStorage.Transactions.AddLog:Destroy()
+         end
+        while wait(.25) do
+                game.Players.LocalPlayer.CurrentSaveSlot.Value = -1
+            end
+    end)
+    local PlayerSection = Tab:NewSection("Auto Money Dupe")
+    PlayerSection:NewButton("Dupe Money", "Press To Dupe Money", function()
+             
+local Manager = game:GetService("VirtualInputManager")
+ 
+local Fol = Instance.new("Folder", game.Workspace)
+Fol.Name = "Folder"
+ 
+Fol.ChildAdded:connect(function(child)
+if child.Value == "Money" then
+wait()
+child:Destroy()
+ 
+game.ReplicatedStorage.Transactions.ClientToServer.Donate:InvokeServer(game.Players.LocalPlayer, game.Players.LocalPlayer.leaderstats.Money.Value, 1)
+ 
+elseif child.Value == "Load" then
+wait()
+child:Destroy()
+repeat
+game.ReplicatedStorage.LoadSaveRequests.RequestLoad:InvokeServer(-1)
+wait(1)
+until game.Players.LocalPlayer.leaderstats.Money.Value == 20
+game.ReplicatedStorage.LoadSaveRequests.RequestLoad:InvokeServer(game.Players.LocalPlayer.CurrentSaveSlot.Value)
+elseif child.Value == "Save" then
+wait()
+child:Destroy()
+game.ReplicatedStorage.LoadSaveRequests.RequestSave:InvokeServer(game.Players.LocalPlayer.CurrentSaveSlot.Value)
+end
+end)
+ 
+function Call(VAL)
+local String = Instance.new("StringValue")
+String.Value = VAL
+String.Parent = Fol
+end
+local CurrentMoney
+ 
+function MoneyDupe(Times)
+    for i = 1, Times do
+        if game.Players.LocalPlayer.CurrentSaveSlot.Value ~= -1 then
+            CurrentMoney = game.Players.LocalPlayer.leaderstats.Money.Value
+            local DupeSlot = game.Players.LocalPlayer.CurrentSaveSlot.Value
+            repeat
+                Call("Money")
+                wait(1)
+            until game.Players.LocalPlayer.leaderstats.Money.Value == 0
+            wait(59)
+            Call("Load")
+            repeat
+                wait(0.1)
+            until game:GetService("Players").LocalPlayer.PlayerGui.PropertyPurchasingGUI.SelectPurchase.Visible == true
+                wait(1.2)
+            Manager:SendKeyEvent(true,"E",false,game)
+            repeat
+                wait(0.1)
+            until game:GetService("Players").LocalPlayer.PlayerGui.PropertyPurchasingGUI.ConfirmPurchase.Visible == true
+            wait(0.5)
+            Manager:SendKeyEvent(true,"E",false,game) 
+            repeat
+                wait(0.1)
+            until game.Players.LocalPlayer.leaderstats.Money.Value > CurrentMoney
+            for i = 1, 3 do
+            Call("Save")
+            wait(0.1)
+            end
+        end
+    end
+end
+ 
+MoneyDupe(1)
+    end)
+    PlayerSection:NewButton("Dupe Money Gui", "Press To Open RBLXploit Money Dupe Gui", function()
+        loadstring(game:HttpGet("https://pastebin.com/raw/nJa7aMHc"))()
+    end)
+    local PlayerSection = Tab:NewSection("Axe Dupe")
+    PlayerSection:NewButton("Dupe Axes", "Dupe Axes In Inventory", function()
+        local BaseC
+for i, v in pairs(game.Workspace.Properties:GetChildren()) do
+if v.Owner.Value == game.Players.LocalPlayer then
+BaseC = v.OriginSquare.CFrame + Vector3.new(0,5,0)
+end
+end
+if BaseC == nil then
+BaseC = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame
+end
+if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Tool", true) then
+game:GetService("Players").LocalPlayer.Character.Humanoid:UnequipTools()
+wait(0.1)
+end
+game:GetService('Players').LocalPlayer.Character.Head:Destroy()
+wait(0.2)
+game:GetService('Players').LocalPlayer.Character:Destroy()
+wait(0.9)
+for i,v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
+local A_1 = v
+local A_2 = "Drop tool"
+local A_3 = BaseC
+local Event = game:GetService("ReplicatedStorage").Interaction.ClientInteracted
+Event:FireServer(A_1, A_2, A_3)
+end
+    end)
+    PlayerSection:NewButton("Drop Axes", "Drops Axes In Inventory", function()
+        Amount = 0
+    for a,b in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+        if b.Name ~= "BlueprintTool" and b.Name == "Tool" then
+            game.ReplicatedStorage.Interaction.ClientInteracted:FireServer(b, "Drop tool", game.Players.LocalPlayer.Character.Head.CFrame)
+            Amount = Amount + 1
+        end
+    end
+    SendNotification("Axe Dropped", "Dropped "..Amount.." Axes from your Backpack",5)
+    end)
+    PlayerSection:NewButton("Count Axes", "Counts Axes In Inventory", function()
+        Amount = 0
+        for a,b in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+            if b.Name ~= "BlueprintTool" and b.Name == "Tool" then
+                Amount = Amount + 1
+            end
+        end
+        SendNotification("Axe Amount", "You have "..Amount.." Axes in your Backpack",2)
+    end)
+    PlayerSection:NewButton("Store Axes", "Stores Axes In Inventory", function()
+        Amount = 0
+    for a,b in pairs(game.Players.LocalPlayer.Backpack:GetChildren())do
+        if b.Name ~= "BlueprintTool" and b.Name == "Tool" then
+            b.Parent = game.Players.LocalPlayer
+            Amount = Amount + 1
+        end
+    end
+    SendNotification("Store Notification", "Stored "..Amount.." Axes, you can restore them later", 2)
+    end)
+    PlayerSection:NewButton("Restore Axes", "Restores Axes In Inventory", function()
+        Amount = 0
+        for a,b in pairs(game.Players.LocalPlayer:GetChildren()) do
+            if b.Name ~= "BlueprintTool" and b.Name == "Tool" then
+                b.Parent = game.Players.LocalPlayer.Backpack
+                Amount = Amount + 1
+            end
+        end
+        SendNotification("Restore Notification", "Restored "..Amount.." Axes that you Stored", 2)
+    end)
+
+    --Misc-- 
+    local Tab = Window:NewTab("Misc")
+    local PlayerSection = Tab:NewSection("Misc")
+    PlayerSection:NewButton("GreyWood", "Click This Then E On Blueprint And Press B", function()
+        if GreyStart == "Nothing" then
+            GreyStart = "On"
+            for i,v in next,workspace.PlayerModels:GetChildren() do
+                if v:FindFirstChild("Type") then
+                    if v.Type.Value == "Blueprint" then
+                        v.Type.Value = "Structure"
+                    end
+                end
+            end
+        else
+            GreyStart = "Nothing"
+            for i,v in next,workspace.PlayerModels:GetChildren() do
+                if v:FindFirstChild("Type") then
+                    if v.Type.Value == "Structure" then
+                        v.Type.Value = "Blueprint"
+                    end
+                end
+            end
+        end
+    end)
+    PlayerSection:NewButton("Hard Dragger", "Grab A Tree To Hard Drag", function()
+        loadstring(game:HttpGet("https://pastebin.com/raw/DfFmZuR0", true))()
+    end)
+    PlayerSection:NewButton("Free Land", "Gives Free Land", function()
+        local bm;for _,bn in pairs(workspace.Properties:GetChildren())do if not bn.Owner.Value then bm=bn;break end end;game.Players.LocalPlayer.Character:MoveTo(bm.OriginSquare.Position)game.ReplicatedStorage.PropertyPurchasing.ClientPurchasedProperty:FireServer(bm,bm.OriginSquare.Position)
+    end)
+    PlayerSection:NewButton("MaxLand", "Gives Max Land", function()
+        for i, v in pairs(game:GetService("Workspace").Properties:GetChildren()) do
+            if v:FindFirstChild("Owner") and v.Owner.Value == game.Players.LocalPlayer then
+                base = v
+                square = v.OriginSquare
+                end
+            end
+        function makebase(pos)
+            local Event = game:GetService("ReplicatedStorage").PropertyPurchasing.ClientExpandedProperty
+            Event:FireServer(base, pos)
+            end
+        spos = square.Position
+        makebase(CFrame.new(spos.X + 40, spos.Y, spos.Z))
+        makebase(CFrame.new(spos.X - 40, spos.Y, spos.Z))
+        makebase(CFrame.new(spos.X, spos.Y, spos.Z + 40))
+        makebase(CFrame.new(spos.X, spos.Y, spos.Z - 40))
+        makebase(CFrame.new(spos.X + 40, spos.Y, spos.Z + 40))
+        makebase(CFrame.new(spos.X + 40, spos.Y, spos.Z - 40))
+        makebase(CFrame.new(spos.X - 40, spos.Y, spos.Z + 40))
+        makebase(CFrame.new(spos.X - 40, spos.Y, spos.Z - 40))
+        makebase(CFrame.new(spos.X + 80, spos.Y, spos.Z))
+        makebase(CFrame.new(spos.X - 80, spos.Y, spos.Z))
+        makebase(CFrame.new(spos.X, spos.Y, spos.Z + 80))
+        makebase(CFrame.new(spos.X, spos.Y, spos.Z - 80))
+    --Corners--
+        makebase(CFrame.new(spos.X + 80, spos.Y, spos.Z + 80))
+        makebase(CFrame.new(spos.X + 80, spos.Y, spos.Z - 80))
+        makebase(CFrame.new(spos.X - 80, spos.Y, spos.Z + 80))
+        makebase(CFrame.new(spos.X - 80, spos.Y, spos.Z - 80))
+    --Corners--
+        makebase(CFrame.new(spos.X + 40, spos.Y, spos.Z + 80))
+        makebase(CFrame.new(spos.X - 40, spos.Y, spos.Z + 80))
+        makebase(CFrame.new(spos.X + 80, spos.Y, spos.Z + 40))
+        makebase(CFrame.new(spos.X + 80, spos.Y, spos.Z - 40))
+        makebase(CFrame.new(spos.X - 80, spos.Y, spos.Z + 40))
+        makebase(CFrame.new(spos.X - 80, spos.Y, spos.Z - 40))
+        makebase(CFrame.new(spos.X + 40, spos.Y, spos.Z - 80))
+        makebase(CFrame.new(spos.X - 40, spos.Y, spos.Z - 80))
+    end)
+    PlayerSection:NewButton("Free Land + Max Land", "Gives Free Land + Max Land", function()
+        local bm;for _,bn in pairs(workspace.Properties:GetChildren())do if not bn.Owner.Value then bm=bn;break end end;game.Players.LocalPlayer.Character:MoveTo(bm.OriginSquare.Position)game.ReplicatedStorage.PropertyPurchasing.ClientPurchasedProperty:FireServer(bm,bm.OriginSquare.Position)
+        wait(1)
+        for i, v in pairs(game:GetService("Workspace").Properties:GetChildren()) do
+            if v:FindFirstChild("Owner") and v.Owner.Value == game.Players.LocalPlayer then
+                base = v
+                square = v.OriginSquare
+                end
+            end
+        function makebase(pos)
+            local Event = game:GetService("ReplicatedStorage").PropertyPurchasing.ClientExpandedProperty
+            Event:FireServer(base, pos)
+            end
+        spos = square.Position
+        makebase(CFrame.new(spos.X + 40, spos.Y, spos.Z))
+        makebase(CFrame.new(spos.X - 40, spos.Y, spos.Z))
+        makebase(CFrame.new(spos.X, spos.Y, spos.Z + 40))
+        makebase(CFrame.new(spos.X, spos.Y, spos.Z - 40))
+        makebase(CFrame.new(spos.X + 40, spos.Y, spos.Z + 40))
+        makebase(CFrame.new(spos.X + 40, spos.Y, spos.Z - 40))
+        makebase(CFrame.new(spos.X - 40, spos.Y, spos.Z + 40))
+        makebase(CFrame.new(spos.X - 40, spos.Y, spos.Z - 40))
+        makebase(CFrame.new(spos.X + 80, spos.Y, spos.Z))
+        makebase(CFrame.new(spos.X - 80, spos.Y, spos.Z))
+        makebase(CFrame.new(spos.X, spos.Y, spos.Z + 80))
+        makebase(CFrame.new(spos.X, spos.Y, spos.Z - 80))
+    --Corners--
+        makebase(CFrame.new(spos.X + 80, spos.Y, spos.Z + 80))
+        makebase(CFrame.new(spos.X + 80, spos.Y, spos.Z - 80))
+        makebase(CFrame.new(spos.X - 80, spos.Y, spos.Z + 80))
+        makebase(CFrame.new(spos.X - 80, spos.Y, spos.Z - 80))
+    --Corners--
+        makebase(CFrame.new(spos.X + 40, spos.Y, spos.Z + 80))
+        makebase(CFrame.new(spos.X - 40, spos.Y, spos.Z + 80))
+        makebase(CFrame.new(spos.X + 80, spos.Y, spos.Z + 40))
+        makebase(CFrame.new(spos.X + 80, spos.Y, spos.Z - 40))
+        makebase(CFrame.new(spos.X - 80, spos.Y, spos.Z + 40))
+        makebase(CFrame.new(spos.X - 80, spos.Y, spos.Z - 40))
+        makebase(CFrame.new(spos.X + 40, spos.Y, spos.Z - 80))
+        makebase(CFrame.new(spos.X - 40, spos.Y, spos.Z - 80))
+    end)
+    PlayerSection:NewButton("BTools", "BTools In Your Hotbar", function()
+        print("Getting Btools") 
+wait(1)
+print("Drag Success")
+a = Instance.new("HopperBin") 
+a.BinType = 1 
+a.Parent = game.Players.LocalPlayer.Backpack
+wait(1)
+print("Delete Success")
+a = Instance.new("HopperBin") 
+a.BinType = 4 
+a.Parent = game.Players.LocalPlayer.Backpack
+wait(1)
+print("Copy Success")
+a = Instance.new("HopperBin") 
+a.BinType = 3 
+a.Parent = game.Players.LocalPlayer.Backpack
+    end)
+    PlayerSection:NewButton("CTRL + Click TP", "Hold CTRL And Left Click TP", function()
+        local UIS = game:GetService("UserInputService")
+ 
+local Player = game.Players.LocalPlayer
+local Mouse = Player:GetMouse()
+ 
+ 
+function GetCharacter()
+   return game.Players.LocalPlayer.Character
+end
+ 
+function Teleport(pos)
+   local Char = GetCharacter()
+   if Char then
+       Char:MoveTo(pos)
+   end
+end
+ 
+ 
+UIS.InputBegan:Connect(function(input)
+   if input.UserInputType == Enum.UserInputType.MouseButton1 and UIS:IsKeyDown(Enum.KeyCode.LeftControl) then
+       Teleport(Mouse.Hit.p)
+   end
+end)
+    end)
+    PlayerSection:NewButton("Walk On Water", "Go And Walk To Palm Trees", function()
+        local toggle = false
+        toggle = not toggle
+		if toggle then
+			for index, water in pairs(game.Workspace.Water:GetChildren()) do
+	   water.CanCollide = true
+	end
+		else
+			for index, water in pairs(game.Workspace.Water:GetChildren()) do
+	   water.CanCollide = false
+	end
+		end
+    end)
+    PlayerSection:NewButton("All Blueprints", "Gets All Blueprints", function()
+        for i,v in pairs(game.ReplicatedStorage.Purchasables.Structures.BlueprintStructures:GetChildren()) do
+            local clone = v:Clone()
+            clone.Parent = game.Players.LocalPlayer.PlayerBlueprints.Blueprints
+            end
+    end)
+    PlayerSection:NewButton("BlackList All", "Blacklists Everyone In The Server", function()
+        Client = game.ReplicatedStorage.Interaction.ClientSetListPlayer
+        players = game.Players
+        for i, v in pairs(players:GetPlayers()) do
+            if v.Name ~= players.LocalPlayer.Name then
+                Client:InvokeServer(players.LocalPlayer.BlacklistFolder, v, true)
+            end
+        end
+        players.PlayerAdded:connect(function(plr)
+            Client:InvokeServer(players.LocalPlayer.BlacklistFolder, plr, true)
+        end)
+    end)
+    PlayerSection:NewButton("AntiBlackList All", "Makes It So You Can Go In Peoples Bases If Blacklisted", function()
+        local plr = game.Players.LocalPlayer
+	    local cframe
+	    for i,v in next, workspace:GetDescendants() do
+	        if v:IsA("SpawnLocation") then
+	            v.Touched:Connect(function(h)
+	            if h.Parent == plr.Character and cframe then
+	                plr.Character:SetPrimaryPartCFrame(cframe)
+	                end
+	            end)
+	        end
+	    end
+ 
+	    game:GetService("RunService"):BindToRenderStep("NO HACKS",Enum.RenderPriority.Last.Value,function()
+	    if game.Players.LocalPlayer.Character.PrimaryPart then
+	        cframe = game.Players.LocalPlayer.Character.PrimaryPart.CFrame
+	        end
+	    end)
+ 
+	    for i,v in next, debug.getregistry() do
+	        if type(v)=='function' and debug.getupvalues(v).lastUpdate then
+	            debug.setupvalue(v,"lastUpdate",math.huge)
+	            break
+	        end
+	    end
+ 
+	    for i,v in next, workspace.Effects:GetChildren() do
+	        if v:IsA("BasePart") and v.Name == "BlacklistWall" then
+	            v:Destroy()
+	        end
+	    end
+    end)
+    PlayerSection:NewButton("Break The Game", "BREAKS THE GAME", function()
+        for i,v in pairs(game.Workspace:GetDescendants()) do
+            if v.Name == "WoodSection" and v.Parent:FindFirstChild("CutEvent") then
+                game.ReplicatedStorage.Interaction.ClientIsDragging:FireServer(v.Parent)
+                game.ReplicatedStorage.Interaction.DestroyStructure:FireServer(v.Parent)
+            end
+        end
+        game.Workspace.DescendantAdded:connect(function(Thing)
+            wait(0.1)
+            if Thing.Name == "WoodSection" and Thing.Parent:FindFirstChild("CutEvent") then
+                game.ReplicatedStorage.Interaction.ClientIsDragging:FireServer(Thing.Parent)
+                game.ReplicatedStorage.Interaction.DestroyStructure:FireServer(Thing.Parent)
+            end
+        end)
+    end)
+
+    -- Environment--
+    local Tab = Window:NewTab("Environment")
+    local PlayerSection = Tab:NewSection("Environment")
+    PlayerSection:NewButton("NoFog", "NoFog", function()
+        game.Lighting.Changed:connect(function()
+            game.Lighting.TimeOfDay = "12:00:00"
+            game.Lighting.FogEnd = 9999
+            game.Lighting.Brightness = 2
+        end)
+    end)
+    PlayerSection:NewButton("Spooky", "Click And Changes The Weather To Spooky", function()
+        l=game.Lighting
+
+cycletime=60*2
+rate=1/30
+
+--marker is in hours and outside is 1-255
+points={
+	{marker=0,outside=0,amb=0,bright=0,fog=Vector3.new(0,0,0)},
+	{marker=3,outside=0,amb=0,bright=.5,fog=Vector3.new(0,0,0)},
+	{marker=5.5,outside=40,amb=0,bright=.6,fog=Vector3.new(0,0,0)},
+	{marker=6.5,outside=130,amb=0,bright=.7,fog=Vector3.new(130,158,170)},	--190,230,230	--130,158,170
+	{marker=10,outside=180,amb=10,bright=1,fog=Vector3.new(160,178,190)},	--220,255,255	--160,178,190
+	{marker=14,outside=180,amb=10,bright=1,fog=Vector3.new(160,178,190)},
+	{marker=17.5,outside=130,amb=0,bright=.7,fog=Vector3.new(130,158,170)},
+	{marker=18.3,outside=40,amb=0,bright=.6,fog=Vector3.new(0,0,0)},
+	{marker=21,outside=0,amb=0,bright=.5,fog=Vector3.new(0,0,0)},
+	{marker=24,outside=0,amb=0,bright=0,fog=Vector3.new(0,0,0)},
+}
+
+while true do
+	wait(rate)
+	
+	local daypercent=(tick()%cycletime)/cycletime
+	local thetime=(24*daypercent)%24
+	local hour=math.floor(thetime)
+	local minute=(thetime-hour)*60
+	local fminute=math.floor(minute)
+	local fsecond=math.floor((minute-fminute)*60)
+	l.TimeOfDay=tostring(hour)..":"..tostring(fminute)..":"..tostring(fsecond)
+	
+	local currentpoints={}
+	for _,v in pairs(points) do
+		if v.marker<thetime then
+			currentpoints[1]=v
+		else
+			currentpoints[2]=v
+			break
+		end
+	end
+	if currentpoints[2]==nil then
+		print("Problem, no next point.",thetime)
+		currentpoints[1]=points[1]
+		currentpoints[2]=points[2]
+	end
+	local pointpercent=(thetime-currentpoints[1].marker)/(currentpoints[2].marker-currentpoints[1].marker)
+
+	local wave=1-((math.cos(math.pi*pointpercent)+1)*.5)
+
+	local outsideclr=(currentpoints[1].outside+((currentpoints[2].outside-currentpoints[1].outside)*wave))/255
+	l.OutdoorAmbient=Color3.new(outsideclr,outsideclr,outsideclr)
+	
+	local ambclr=(currentpoints[1].amb+((currentpoints[2].amb-currentpoints[1].amb)*wave))/255
+	l.Ambient=Color3.new(ambclr,ambclr,ambclr)
+	
+	l.Brightness=currentpoints[1].bright+((currentpoints[2].bright-currentpoints[1].bright)*wave)
+	
+	local fogclr=(currentpoints[1].fog+((currentpoints[2].fog-currentpoints[1].fog)*wave))*(1/255)
+	l.FogColor=Color3.new(fogclr.x,fogclr.y,fogclr.z)
+
+end
+    end)
+
+
+-- Wood --
+local Tab = Window:NewTab("Wood")
+local PlayerSection = Tab:NewSection("Wood Options")
+PlayerSection:NewButton("Mod Wood", "Mod Wood Using Old Version", function()
+    for _, Log in pairs(workspace.LogModels:GetChildren()) do
+        if Log.Name:sub(1, 6) == "Loose_" and Log:findFirstChild("Owner") then
+            if Log.Owner.Value == game.Players.LocalPlayer then
+                for i,v in pairs(Log:GetChildren()) do
+                    if v.Name=="WoodSection" then
+                        spawn(function()
+                            for i=1,10 do
+                                wait()
+                                v.CFrame=CFrame.new(Vector3.new(315, -0.296, 85.791))*CFrame.Angles(math.rad(90),0,0)
+                            end
+                        end)
+                    end
+                end
+                spawn(function()
+                    for i=1,20 do
+                        wait()
+                        game.ReplicatedStorage.Interaction.ClientIsDragging:FireServer(Log.WoodSection)
+            game.ReplicatedStorage.Interaction.ClientRequestOwnership:FireServer(Log.WoodSection)
+                    end
+                end)
+            end
+        end
+    end
+wait(2.0)
+    for _, Log in pairs(game.Workspace.LogModels:GetChildren()) do
+        if Log.Name:sub(1, 6) == "Loose_" and Log:findFirstChild("Owner") then
+            if Log.Owner.Value == game.Players.LocalPlayer then
+                Log:MoveTo(game.Players.LocalPlayer.Character.HumanoidRootPart.Position)
+                for i=1,20 do
+                    game.ReplicatedStorage.Interaction.ClientIsDragging:FireServer(Log.WoodSection)
+                    game.ReplicatedStorage.Interaction.ClientRequestOwnership:FireServer(Log.WoodSection)
+                end
+            end
+        end
+    end
+end)
+PlayerSection:NewButton("TP Logs", "Teleports Logs", function()
+    for _, Log in pairs(game.Workspace.LogModels:GetChildren()) do
+        if Log.Name:sub(1, 6) == "Loose_" and Log:findFirstChild("Owner") then
+            if Log.Owner.Value == game.Players.LocalPlayer then
+                Log:MoveTo(game.Players.LocalPlayer.Character.HumanoidRootPart.Position + Vector3.new(0, 20, 0))
+                for i=1,100 do
+                    game.ReplicatedStorage.Interaction.ClientIsDragging:FireServer(Log)
+                end
+            end
+        end
+    end
+end)
+PlayerSection:NewButton("TP Planks", "Teleports Planks", function()
+    for _, Plank in pairs(game.Workspace.PlayerModels:GetChildren()) do
+		if Plank.Name=="Plank" and Plank:findFirstChild("Owner") then
+			if Plank.Owner.Value == game.Players.LocalPlayer then
+				sendNotice = game.ReplicatedStorage.Notices.SendUserNotice
+				sendNotice:Fire("Click where you want ALL the Planks to TP to")
+				local ButtonPress
+				ButtonPress = game.Players.LocalPlayer:GetMouse().Button1Down:Connect(function()
+					Square = game.Players.LocalPlayer:GetMouse().Target
+					if (Square.Name == "OriginSquare" or Square.Name == "Square") then
+						ButtonPress:Disconnect()
+						Plank:MoveTo(Square.Position)
+						for i=1,100 do
+							game.ReplicatedStorage.Interaction.ClientIsDragging:FireServer(Plank)
+						end
+					end
+				end)
+			end
+		end
+	end
+end)
+PlayerSection:NewButton("Sell Logs", "Sells All Owned Logs", function()
+    for _, Log in pairs(workspace.LogModels:GetChildren()) do
+        if Log.Name:sub(1, 6) == "Loose_" and Log:findFirstChild("Owner") then
+            if Log.Owner.Value == game.Players.LocalPlayer then
+                for i,v in pairs(Log:GetChildren()) do
+                    if v.Name=="WoodSection" then
+                        spawn(function()
+                            for i=1,10 do
+                                wait()
+                                v.CFrame=CFrame.new(Vector3.new(315, -0.296, 85.791))*CFrame.Angles(math.rad(90),0,0)
+                            end
+                        end)
+                    end
+                end
+                spawn(function()
+                    for i=1,20 do
+                        wait()
+                        game.ReplicatedStorage.Interaction.ClientIsDragging:FireServer(Log)
+                    end
+                end)
+            end
+        end
+    end
+end)
+PlayerSection:NewButton("Sell Planks", "Sells All Owned Planks", function()
+    for _, Plank in pairs(game.Workspace.PlayerModels:GetChildren()) do
+		if Plank.Name=="Plank" and Plank:findFirstChild("Owner") then
+			if Plank.Owner.Value == game.Players.LocalPlayer then
+				for i,v in pairs(Plank:GetChildren()) do
+					if v.Name=="WoodSection" then
+						spawn(function()
+							for i=1,10 do
+								wait()
+								v.CFrame=CFrame.new(Vector3.new(315, -0.296, 85.791))*CFrame.Angles(math.rad(90),0,0)
+							end
+						end)
+					end
+				end
+				spawn(function()
+					for i=1,20 do
+						wait()
+						game.ReplicatedStorage.Interaction.ClientIsDragging:FireServer(Plank)
+					end
+				end)
+			end
+		end
+	end
+end)
+
+--Teleports--
+
+    local Teleport = Window:NewTab("Teleports")
+    local TeleportSection = Teleport:NewSection("Teleports")
+    TeleportSection:NewDropdown("Teleports", "Click Somewhere To Teleport", {"WoodRUs", "Land Store", "Boxed Cars", "Fancy Furnishings", "Bobs Shack", "Links Logic"}, function(v)
+        
+    end)
+     
+
+         -- Scripts--
+
+         local Tab = Window:NewTab("Scripts")
+         local PlayerSection = Tab:NewSection("Scripts")
+        PlayerSection:NewButton("AlphaDrop Gui", "Opens Base Drop Gui", function()
+            loadstring(game:GetObjects("rbxassetid://4832010530")[1].Source)()
+        end)
+        PlayerSection:NewButton("ExtremeDupe Gui", "Opens Dupe Gui", function()
+            loadstring(game:HttpGet("https://pastebin.com/raw/ghRqqbLb"))()
+        end)
+        PlayerSection:NewButton("Blood Gui", "Opens Blood Gui", function()
+            _G.BloodKey = "AV15102021oddyHackerHockeyAV015102021"
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/IFYOUWANTBLOOD/hoofer/master/v14.70FREEdoNOTbuy"))()
+        end)
+        PlayerSection:NewButton("Dirt Gui", "Opens Dirt Gui", function()
+            loadstring(game:HttpGet("https://dirtgui.xyz/Lt2.lua", true))()
+        end)
+        PlayerSection:NewButton("Cool Solo Dupe", "Opens Dupe Script", function()
+            loadstring(game:HttpGet'https://raw.githubusercontent.com/0x37Dev/Cool-Solo-Dupe-Thing/main/script.lua')()
+        end)
+        PlayerSection:NewButton("DarkDex", "Opens DarkDex Editor", function()
+            loadstring(game:GetObjects("rbxassetid://418957341")[1].Source)()
+        end)
+
+     --Credits--
+
+    local Credit = Window:NewTab("Credits")
+    local Credit = Credit:NewSection("All Credits Go To Kaden#8392")
+    end
+
+
+
+
+
+
+    if game.PlaceId == 286090429 then
+        local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+        local Window = Library.CreateLib("RBLXploits - Arsenal", "BloodTheme")
+        
+        --Main--
+    
+        local Tab = Window:NewTab("Main")
+        local PlayerSection = Tab:NewSection("Main")
+        PlayerSection:NewButton("Silent Aim + Wallbang", "Kills People In A Certain Radius", function()
+            local CurrentCamera = workspace.CurrentCamera
+local Players = game.GetService(game, "Players")
+local LocalPlayer = Players.LocalPlayer
+local Mouse = LocalPlayer:GetMouse()
+function ClosestPlayer()
+    local MaxDist, Closest = math.huge
+    for I,V in pairs(Players.GetPlayers(Players)) do
+        if V == LocalPlayer then continue end
+        if V.Team == LocalPlayer then continue end
+        if not V.Character then continue end
+        local Head = V.Character.FindFirstChild(V.Character, "Head")
+        if not Head then continue end
+        local Pos, Vis = CurrentCamera.WorldToScreenPoint(CurrentCamera, Head.Position)
+        if not Vis then continue end
+        local MousePos, TheirPos = Vector2.new(Mouse.X, Mouse.Y), Vector2.new(Pos.X, Pos.Y)
+        local Dist = (TheirPos - MousePos).Magnitude
+        if Dist < MaxDist then
+            MaxDist = Dist
+            Closest = V
+        end
+    end
+    return Closest
+end
+local MT = getrawmetatable(game)
+local OldNC = MT.__namecall
+local OldIDX = MT.__index
+setreadonly(MT, false)
+MT.__namecall = newcclosure(function(self, ...)
+    local Args, Method = {...}, getnamecallmethod()
+    if Method == "FindPartOnRayWithIgnoreList" and not checkcaller() then
+        local CP = ClosestPlayer()
+        if CP and CP.Character and CP.Character.FindFirstChild(CP.Character, "Head") then
+            Args[1] = Ray.new(CurrentCamera.CFrame.Position, (CP.Character.Head.Position - CurrentCamera.CFrame.Position).Unit * 1000)
+            return OldNC(self, unpack(Args))
+        end
+    end
+    return OldNC(self, ...)
+end)
+MT.__index = newcclosure(function(self, K)
+    if K == "Clips" then
+        return workspace.Map
+    end
+    return OldIDX(self, K)
+end)
+setreadonly(MT, true)
+        end)
+        PlayerSection:NewButton("Aimbot - (E)", "Press E To Lock On People", function()
+            print('To Enable Press E')
+bodyPart = 'UpperTorso'
+
+on = false
+
+local lp = game:GetService('Players').LocalPlayer
+local char = lp.Character
+
+
+local mouse = lp:GetMouse()
+
+
+game:GetService("UserInputService").InputBegan:connect(function(inputObject)
+   if inputObject.KeyCode == Enum.KeyCode.E then
+       on = not on
+   end
+end)
+
+
+
+
+
+
+
+
+
+
+
+
+--[[local function isObstructed(part)
+   local hrp = char.HumanoidRootPart
+   local PointA_Position = hrp.Position
+   local PointB_Position = part.Position
+
+   local Direction = (PointB_Position - PointA_Position).Unit
+   local Raycast = Ray.new(PointA_Position, Direction * 100)
+   local Hit = workspace:FindPartOnRay(Raycast, char)
+   if Hit == part then
+       return true
+   else
+       return false
+   end
+end
+]]
+
+function cansee(targ)
+   local cam = workspace.CurrentCamera
+   local ray = Ray.new(lp.Character.Head.CFrame.p, (targ.CFrame.p - lp.Character.Head.CFrame.p).unit * 300)
+   local part, position = workspace:FindPartOnRayWithIgnoreList(ray, {lp.Character}, false, true)
+   if part then
+       local humanoid = part.Parent:FindFirstChildOfClass("Humanoid")
+
+       if not humanoid then
+           humanoid = part.Parent.Parent:FindFirstChildOfClass("Humanoid")
+       end
+
+       if humanoid and targ and humanoid.Parent == targ.Parent then
+           local blah,actualthing = cam:WorldToScreenPoint(targ.Position)
+           if actualthing == true then
+               return true
+           else
+               return false
+           end
+       else
+           return false
+       end
+   else
+       return false
+   end
+end
+
+
+
+
+local function getClosestPlayerToCursor(x, y)
+   local closestPlayer = nil
+   local shortestDistance = math.huge
+
+   for i, v in pairs(game:GetService("Players"):GetPlayers()) do
+       if v ~= lp and v.Character and v.Character:FindFirstChild("Humanoid") and v.Character.Humanoid.Health ~= 0 and v.Character:FindFirstChild("HumanoidRootPart") and v.Character:FindFirstChild("Head") then
+           local pos = game:GetService("Workspace").CurrentCamera:WorldToViewportPoint(v.Character.HumanoidRootPart.Position)
+           local magnitude = (Vector2.new(pos.X, pos.Y) - Vector2.new(x, y)).magnitude
+
+           local targettable = (v.Team ~= lp.Team or v.Team == nil) and v.Character.Humanoid.Health > 0
+           if magnitude < shortestDistance and cansee(v.Character.Head) == true and (v.Team ~= lp.Team or v.Team == nil) and v.Character.Humanoid.Health > 0 then
+               closestPlayer = v
+               shortestDistance = magnitude
+           end
+end
+   end
+   return closestPlayer, shortestDistance
+end
+
+
+
+
+
+
+
+
+
+
+TweenStatus = nil
+
+local TweenService = game:GetService("TweenService")
+TweenCFrame = Instance.new("CFrameValue")
+
+
+function tweenstuff(partpos)
+TweenStatus = true
+TweenCFrame.Value = workspace.CurrentCamera.CFrame
+local tweenframe = TweenService:Create(TweenCFrame, TweenInfo.new(0.2),{Value = CFrame.new(workspace.CurrentCamera.CFrame.Position, partpos)})
+tweenframe:Play()
+tweenframe.Completed:Wait()
+TweenStatus = nil
+TweenCFrame.Value = CFrame.new(0,0,0)
+end
+
+
+
+
+game:GetService('RunService').Heartbeat:connect(function()
+   if on == true then
+       local plr, distance = getClosestPlayerToCursor(mouse.X, mouse.Y)
+if TweenStatus == nil and plr ~= nil and distance > 150 then
+tweenstuff(plr.Character.Head.Position)
+end
+if TweenStatus == true then
+workspace.CurrentCamera.CFrame = TweenCFrame.Value
+end
+if plr ~= nil and distance < 150 and TweenStatus == nil then
+workspace.CurrentCamera.CFrame = CFrame.new(workspace.CurrentCamera.CFrame.Position, plr.Character.Head.Position)
+end
+end
+end)
+        end)
+        PlayerSection:NewButton("ESP", "Click For ESP", function()
+            function Create(base, team)
+                local bb = Instance.new('BillboardGui', game.CoreGui)
+                bb.Adornee = base
+                bb.ExtentsOffset = Vector3.new(0,1,0)
+                bb.AlwaysOnTop = true
+                bb.Size = UDim2.new(0,5,0,5)
+                bb.StudsOffset = Vector3.new(0,1,0)
+                bb.Name = 'tracker'
+                local frame = Instance.new('Frame',bb)
+                frame.ZIndex = 10
+                frame.BackgroundTransparency = 0.3
+                frame.Size = UDim2.new(1,0,1,0)
+                local txtlbl = Instance.new('TextLabel',bb)
+                txtlbl.ZIndex = 10
+                txtlbl.BackgroundTransparency = 1
+                txtlbl.Position = UDim2.new(0,0,0,-35)
+                txtlbl.Size = UDim2.new(1,0,10,0)
+                txtlbl.Font = 'ArialBold'
+                txtlbl.FontSize = 'Size12'
+                txtlbl.Text = base.Parent.Name:upper()
+                txtlbl.TextStrokeTransparency = 0.5
+                if team then
+                    txtlbl.TextColor3 = Color3.new(0,1,1)
+                    frame.BackgroundColor3 = Color3.new(0,1,1)
+                else
+                    txtlbl.TextColor3 = Color3.new(1,0,0)
+                    frame.BackgroundColor3 = Color3.new(1,0,0)
+                end
+              end
+              
+              function Clear()
+                for _,v in pairs(game.CoreGui:children()) do
+                    if v.Name == 'tracker' and v:isA('BillboardGui') then
+                        v:Destroy()
+                    end
+                end
+              end
+              
+              function Find()
+                Clear()
+                track = true
+                spawn(function()
+                    while wait(1) do
+                        if track then
+                            Clear()
+                            for _,v in pairs(game.Players:players()) do
+                                if v.TeamColor ~= game.Players.LocalPlayer.TeamColor then
+                                    if v.Character and v.Character.Head then
+                                        Create(v.Character.Head, false)
+                                    end
+                                end
+                            end
+                        end
+                        wait(1)
+                    end
+                end)
+              end
+              
+              Find()
+
+
+
+              local Holder = Instance.new("Folder", game.CoreGui)
+              Holder.Name = "ESP"
+               
+              local Box = Instance.new("BoxHandleAdornment")
+              Box.Name = "nilBox"
+              Box.Size = Vector3.new(4, 7, 4)
+              Box.Color3 = Color3.new(100 / 255, 100 / 255, 100 / 255)
+              Box.Transparency = 0.7
+              Box.ZIndex = 0
+              Box.AlwaysOnTop = true
+              Box.Visible = true
+               
+              local NameTag = Instance.new("BillboardGui")
+              NameTag.Name = "nilNameTag"
+              NameTag.Enabled = false
+              NameTag.Size = UDim2.new(0, 200, 0, 50)
+              NameTag.AlwaysOnTop = true
+              NameTag.StudsOffset = Vector3.new(0, 1.8, 0)
+              local Tag = Instance.new("TextLabel", NameTag)
+              Tag.Name = "Tag"
+              Tag.BackgroundTransparency = 1
+              Tag.Position = UDim2.new(0, -50, 0, 0)
+              Tag.Size = UDim2.new(0, 300, 0, 20)
+              Tag.TextSize = 20
+              Tag.TextColor3 = Color3.new(100 / 255, 100 / 255, 100 / 255)
+              Tag.TextStrokeColor3 = Color3.new(0 / 255, 0 / 255, 0 / 255)
+              Tag.TextStrokeTransparency = 0.4
+              Tag.Text = "nil"
+              Tag.Font = Enum.Font.SourceSansBold
+              Tag.TextScaled = false
+               
+              local LoadCharacter = function(v)
+                  repeat wait() until v.Character ~= nil
+                  v.Character:WaitForChild("Humanoid")
+                  local vHolder = Holder:FindFirstChild(v.Name)
+                  vHolder:ClearAllChildren()
+                  local b = Box:Clone()
+                  b.Name = v.Name .. "Box"
+                  b.Adornee = v.Character
+                  b.Parent = vHolder
+                  local t = NameTag:Clone()
+                  t.Name = v.Name .. "NameTag"
+                  t.Enabled = true
+                  t.Parent = vHolder
+                  t.Adornee = v.Character:WaitForChild("Head", 5)
+                  if not t.Adornee then
+                      return UnloadCharacter(v)
+                  end
+                  t.Tag.Text = v.Name
+                  b.Color3 = Color3.new(v.TeamColor.r, v.TeamColor.g, v.TeamColor.b)
+                  t.Tag.TextColor3 = Color3.new(v.TeamColor.r, v.TeamColor.g, v.TeamColor.b)
+                  local Update
+                  local UpdateNameTag = function()
+                      if not pcall(function()
+                          v.Character.Humanoid.DisplayDistanceType = Enum.HumanoidDisplayDistanceType.None
+                          local maxh = math.floor(v.Character.Humanoid.MaxHealth)
+                          local h = math.floor(v.Character.Humanoid.Health)
+                          t.Tag.Text = v.Name .. "\n" .. ((maxh ~= 0 and tostring(math.floor((h / maxh) * 100))) or "0") .. "%  " .. tostring(h) .. "/" .. tostring(maxh)
+                      end) then
+                          Update:Disconnect()
+                      end
+                  end
+                  UpdateNameTag()
+                  Update = v.Character.Humanoid.Changed:Connect(UpdateNameTag)
+              end
+               
+              local UnloadCharacter = function(v)
+                  local vHolder = Holder:FindFirstChild(v.Name)
+                  if vHolder and (vHolder:FindFirstChild(v.Name .. "Box") ~= nil or vHolder:FindFirstChild(v.Name .. "NameTag") ~= nil) then
+                      vHolder:ClearAllChildren()
+                  end
+              end
+               
+              local LoadPlayer = function(v)
+                  local vHolder = Instance.new("Folder", Holder)
+                  vHolder.Name = v.Name
+                  v.CharacterAdded:Connect(function()
+                      pcall(LoadCharacter, v)
+                  end)
+                  v.CharacterRemoving:Connect(function()
+                      pcall(UnloadCharacter, v)
+                  end)
+                  v.Changed:Connect(function(prop)
+                      if prop == "TeamColor" then
+                          UnloadCharacter(v)
+                          wait()
+                          LoadCharacter(v)
+                      end
+                  end)
+                  LoadCharacter(v)
+              end
+               
+              local UnloadPlayer = function(v)
+                  UnloadCharacter(v)
+                  local vHolder = Holder:FindFirstChild(v.Name)
+                  if vHolder then
+                      vHolder:Destroy()
+                  end
+              end
+               
+              for i,v in pairs(game:GetService("Players"):GetPlayers()) do
+                  spawn(function() pcall(LoadPlayer, v) end)
+              end
+               
+              game:GetService("Players").PlayerAdded:Connect(function(v)
+                  pcall(LoadPlayer, v)
+              end)
+               
+              game:GetService("Players").PlayerRemoving:Connect(function(v)
+                  pcall(UnloadPlayer, v)
+              end)
+               
+              game:GetService("Players").LocalPlayer.NameDisplayDistance = 0
+        end)
+        PlayerSection:NewButton("Freecam - (Shift+P)", "Freecam", function()
+            function sandbox(var,func)
+                local env = getfenv(func)
+                local newenv = setmetatable({},{
+                __index = function(self,k)
+                if k=="script" then
+                return var
+                else
+                return env[k]
+                end
+                end,
+                })
+                setfenv(func,newenv)
+                return func
+                end
+                cors = {}
+                mas = Instance.new("Model",game:GetService("Lighting"))
+                LocalScript0 = Instance.new("LocalScript")
+                LocalScript0.Name = "FreeCamera"
+                LocalScript0.Parent = mas
+                table.insert(cors,sandbox(LocalScript0,function()
+                -----------------------------------------------------------------------
+                -- Freecam
+                -- Cinematic free camera for spectating and video production.
+                ------------------------------------------------------------------------
+                
+                local pi    = math.pi
+                local abs   = math.abs
+                local clamp = math.clamp
+                local exp   = math.exp
+                local rad   = math.rad
+                local sign  = math.sign
+                local sqrt  = math.sqrt
+                local tan   = math.tan
+                
+                local ContextActionService = game:GetService("ContextActionService")
+                local Players = game:GetService("Players")
+                local RunService = game:GetService("RunService")
+                local StarterGui = game:GetService("StarterGui")
+                local UserInputService = game:GetService("UserInputService")
+                
+                local LocalPlayer = Players.LocalPlayer
+                if not LocalPlayer then
+                Players:GetPropertyChangedSignal("LocalPlayer"):Wait()
+                LocalPlayer = Players.LocalPlayer
+                end
+                
+                local Camera = workspace.CurrentCamera
+                workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(function()
+                local newCamera = workspace.CurrentCamera
+                if newCamera then
+                Camera = newCamera
+                end
+                end)
+                
+                ------------------------------------------------------------------------
+                
+                local TOGGLE_INPUT_PRIORITY = Enum.ContextActionPriority.Low.Value
+                local INPUT_PRIORITY = Enum.ContextActionPriority.High.Value
+                local FREECAM_MACRO_KB = {Enum.KeyCode.LeftShift, Enum.KeyCode.P}
+                
+                local NAV_GAIN = Vector3.new(1, 1, 1)*64
+                local PAN_GAIN = Vector2.new(0.75, 1)*8
+                local FOV_GAIN = 300
+                
+                local PITCH_LIMIT = rad(90)
+                
+                local VEL_STIFFNESS = 1.5
+                local PAN_STIFFNESS = 1.0
+                local FOV_STIFFNESS = 4.0
+                
+                ------------------------------------------------------------------------
+                
+                local Spring = {} do
+                Spring.__index = Spring
+                
+                function Spring.new(freq, pos)
+                local self = setmetatable({}, Spring)
+                self.f = freq
+                self.p = pos
+                self.v = pos*0
+                return self
+                end
+                
+                function Spring:Update(dt, goal)
+                local f = self.f*2*pi
+                local p0 = self.p
+                local v0 = self.v
+                
+                local offset = goal - p0
+                local decay = exp(-f*dt)
+                
+                local p1 = goal + (v0*dt - offset*(f*dt + 1))*decay
+                local v1 = (f*dt*(offset*f - v0) + v0)*decay
+                
+                self.p = p1
+                self.v = v1
+                
+                return p1
+                end
+                
+                function Spring:Reset(pos)
+                self.p = pos
+                self.v = pos*0
+                end
+                end
+                
+                ------------------------------------------------------------------------
+                
+                local cameraPos = Vector3.new()
+                local cameraRot = Vector2.new()
+                local cameraFov = 0
+                
+                local velSpring = Spring.new(VEL_STIFFNESS, Vector3.new())
+                local panSpring = Spring.new(PAN_STIFFNESS, Vector2.new())
+                local fovSpring = Spring.new(FOV_STIFFNESS, 0)
+                
+                ------------------------------------------------------------------------
+                
+                local Input = {} do
+                local thumbstickCurve do
+                local K_CURVATURE = 2.0
+                local K_DEADZONE = 0.15
+                
+                local function fCurve(x)
+                return (exp(K_CURVATURE*x) - 1)/(exp(K_CURVATURE) - 1)
+                end
+                
+                local function fDeadzone(x)
+                return fCurve((x - K_DEADZONE)/(1 - K_DEADZONE))
+                end
+                
+                function thumbstickCurve(x)
+                return sign(x)*clamp(fDeadzone(abs(x)), 0, 1)
+                end
+                end
+                
+                local gamepad = {
+                ButtonX = 0,
+                ButtonY = 0,
+                DPadDown = 0,
+                DPadUp = 0,
+                ButtonL2 = 0,
+                ButtonR2 = 0,
+                Thumbstick1 = Vector2.new(),
+                Thumbstick2 = Vector2.new(),
+                }
+                
+                local keyboard = {
+                W = 0,
+                A = 0,
+                S = 0,
+                D = 0,
+                E = 0,
+                Q = 0,
+                U = 0,
+                H = 0,
+                J = 0,
+                K = 0,
+                I = 0,
+                Y = 0,
+                Up = 0,
+                Down = 0,
+                LeftShift = 0,
+                RightShift = 0,
+                }
+                
+                local mouse = {
+                Delta = Vector2.new(),
+                MouseWheel = 0,
+                }
+                
+                local NAV_GAMEPAD_SPEED  = Vector3.new(1, 1, 1)
+                local NAV_KEYBOARD_SPEED = Vector3.new(1, 1, 1)
+                local PAN_MOUSE_SPEED    = Vector2.new(1, 1)*(pi/64)
+                local PAN_GAMEPAD_SPEED  = Vector2.new(1, 1)*(pi/8)
+                local FOV_WHEEL_SPEED    = 1.0
+                local FOV_GAMEPAD_SPEED  = 0.25
+                local NAV_ADJ_SPEED      = 0.75
+                local NAV_SHIFT_MUL      = 0.25
+                
+                local navSpeed = 1
+                
+                function Input.Vel(dt)
+                navSpeed = clamp(navSpeed + dt*(keyboard.Up - keyboard.Down)*NAV_ADJ_SPEED, 0.01, 4)
+                
+                local kGamepad = Vector3.new(
+                thumbstickCurve(gamepad.Thumbstick1.x),
+                thumbstickCurve(gamepad.ButtonR2) - thumbstickCurve(gamepad.ButtonL2),
+                thumbstickCurve(-gamepad.Thumbstick1.y)
+                )*NAV_GAMEPAD_SPEED
+                
+                local kKeyboard = Vector3.new(
+                keyboard.D - keyboard.A + keyboard.K - keyboard.H,
+                keyboard.E - keyboard.Q + keyboard.I - keyboard.Y,
+                keyboard.S - keyboard.W + keyboard.J - keyboard.U
+                )*NAV_KEYBOARD_SPEED
+                
+                local shift = UserInputService:IsKeyDown(Enum.KeyCode.LeftShift) or UserInputService:IsKeyDown(Enum.KeyCode.RightShift)
+                
+                return (kGamepad + kKeyboard)*(navSpeed*(shift and NAV_SHIFT_MUL or 1))
+                end
+                
+                function Input.Pan(dt)
+                local kGamepad = Vector2.new(
+                thumbstickCurve(gamepad.Thumbstick2.y),
+                thumbstickCurve(-gamepad.Thumbstick2.x)
+                )*PAN_GAMEPAD_SPEED
+                local kMouse = mouse.Delta*PAN_MOUSE_SPEED
+                mouse.Delta = Vector2.new()
+                return kGamepad + kMouse
+                end
+                
+                function Input.Fov(dt)
+                local kGamepad = (gamepad.ButtonX - gamepad.ButtonY)*FOV_GAMEPAD_SPEED
+                local kMouse = mouse.MouseWheel*FOV_WHEEL_SPEED
+                mouse.MouseWheel = 0
+                return kGamepad + kMouse
+                end
+                
+                do
+                local function Keypress(action, state, input)
+                keyboard[input.KeyCode.Name] = state == Enum.UserInputState.Begin and 1 or 0
+                return Enum.ContextActionResult.Sink
+                end
+                
+                local function GpButton(action, state, input)
+                gamepad[input.KeyCode.Name] = state == Enum.UserInputState.Begin and 1 or 0
+                return Enum.ContextActionResult.Sink
+                end
+                
+                local function MousePan(action, state, input)
+                local delta = input.Delta
+                mouse.Delta = Vector2.new(-delta.y, -delta.x)
+                return Enum.ContextActionResult.Sink
+                end
+                
+                local function Thumb(action, state, input)
+                gamepad[input.KeyCode.Name] = input.Position
+                return Enum.ContextActionResult.Sink
+                end
+                
+                local function Trigger(action, state, input)
+                gamepad[input.KeyCode.Name] = input.Position.z
+                return Enum.ContextActionResult.Sink
+                end
+                
+                local function MouseWheel(action, state, input)
+                mouse[input.UserInputType.Name] = -input.Position.z
+                return Enum.ContextActionResult.Sink
+                end
+                
+                local function Zero(t)
+                for k, v in pairs(t) do
+                t[k] = v*0
+                end
+                end
+                
+                function Input.StartCapture()
+                ContextActionService:BindActionAtPriority("FreecamKeyboard", Keypress, false, INPUT_PRIORITY,
+                Enum.KeyCode.W, Enum.KeyCode.U,
+                Enum.KeyCode.A, Enum.KeyCode.H,
+                Enum.KeyCode.S, Enum.KeyCode.J,
+                Enum.KeyCode.D, Enum.KeyCode.K,
+                Enum.KeyCode.E, Enum.KeyCode.I,
+                Enum.KeyCode.Q, Enum.KeyCode.Y,
+                Enum.KeyCode.Up, Enum.KeyCode.Down
+                )
+                ContextActionService:BindActionAtPriority("FreecamMousePan",          MousePan,   false, INPUT_PRIORITY, Enum.UserInputType.MouseMovement)
+                ContextActionService:BindActionAtPriority("FreecamMouseWheel",        MouseWheel, false, INPUT_PRIORITY, Enum.UserInputType.MouseWheel)
+                ContextActionService:BindActionAtPriority("FreecamGamepadButton",     GpButton,   false, INPUT_PRIORITY, Enum.KeyCode.ButtonX, Enum.KeyCode.ButtonY)
+                ContextActionService:BindActionAtPriority("FreecamGamepadTrigger",    Trigger,    false, INPUT_PRIORITY, Enum.KeyCode.ButtonR2, Enum.KeyCode.ButtonL2)
+                ContextActionService:BindActionAtPriority("FreecamGamepadThumbstick", Thumb,      false, INPUT_PRIORITY, Enum.KeyCode.Thumbstick1, Enum.KeyCode.Thumbstick2)
+                end
+                
+                function Input.StopCapture()
+                navSpeed = 1
+                Zero(gamepad)
+                Zero(keyboard)
+                Zero(mouse)
+                ContextActionService:UnbindAction("FreecamKeyboard")
+                ContextActionService:UnbindAction("FreecamMousePan")
+                ContextActionService:UnbindAction("FreecamMouseWheel")
+                ContextActionService:UnbindAction("FreecamGamepadButton")
+                ContextActionService:UnbindAction("FreecamGamepadTrigger")
+                ContextActionService:UnbindAction("FreecamGamepadThumbstick")
+                end
+                end
+                end
+                
+                local function GetFocusDistance(cameraFrame)
+                local znear = 0.1
+                local viewport = Camera.ViewportSize
+                local projy = 2*tan(cameraFov/2)
+                local projx = viewport.x/viewport.y*projy
+                local fx = cameraFrame.rightVector
+                local fy = cameraFrame.upVector
+                local fz = cameraFrame.lookVector
+                
+                local minVect = Vector3.new()
+                local minDist = 512
+                
+                for x = 0, 1, 0.5 do
+                for y = 0, 1, 0.5 do
+                local cx = (x - 0.5)*projx
+                local cy = (y - 0.5)*projy
+                local offset = fx*cx - fy*cy + fz
+                local origin = cameraFrame.p + offset*znear
+                local part, hit = workspace:FindPartOnRay(Ray.new(origin, offset.unit*minDist))
+                local dist = (hit - origin).magnitude
+                if minDist > dist then
+                minDist = dist
+                minVect = offset.unit
+                end
+                end
+                end
+                
+                return fz:Dot(minVect)*minDist
+                end
+                
+                ------------------------------------------------------------------------
+                
+                local function StepFreecam(dt)
+                local vel = velSpring:Update(dt, Input.Vel(dt))
+                local pan = panSpring:Update(dt, Input.Pan(dt))
+                local fov = fovSpring:Update(dt, Input.Fov(dt))
+                
+                local zoomFactor = sqrt(tan(rad(70/2))/tan(rad(cameraFov/2)))
+                
+                cameraFov = clamp(cameraFov + fov*FOV_GAIN*(dt/zoomFactor), 1, 120)
+                cameraRot = cameraRot + pan*PAN_GAIN*(dt/zoomFactor)
+                cameraRot = Vector2.new(clamp(cameraRot.x, -PITCH_LIMIT, PITCH_LIMIT), cameraRot.y%(2*pi))
+                
+                local cameraCFrame = CFrame.new(cameraPos)*CFrame.fromOrientation(cameraRot.x, cameraRot.y, 0)*CFrame.new(vel*NAV_GAIN*dt)
+                cameraPos = cameraCFrame.p
+                
+                Camera.CFrame = cameraCFrame
+                Camera.Focus = cameraCFrame*CFrame.new(0, 0, -GetFocusDistance(cameraCFrame))
+                Camera.FieldOfView = cameraFov
+                end
+                
+                ------------------------------------------------------------------------
+                
+                local PlayerState = {} do
+                local mouseIconEnabled
+                local cameraSubject
+                local cameraType
+                local cameraFocus
+                local cameraCFrame
+                local cameraFieldOfView
+                local screenGuis = {}
+                local coreGuis = {
+                Backpack = true,
+                Chat = true,
+                Health = true,
+                PlayerList = true,
+                }
+                local setCores = {
+                BadgesNotificationsActive = true,
+                PointsNotificationsActive = true,
+                }
+                
+                -- Save state and set up for freecam
+                function PlayerState.Push()
+                for name in pairs(coreGuis) do
+                coreGuis[name] = StarterGui:GetCoreGuiEnabled(Enum.CoreGuiType[name])
+                StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType[name], false)
+                end
+                for name in pairs(setCores) do
+                setCores[name] = StarterGui:GetCore(name)
+                StarterGui:SetCore(name, false)
+                end
+                local playergui = LocalPlayer:FindFirstChildOfClass("PlayerGui")
+                if playergui then
+                for _, gui in pairs(playergui:GetChildren()) do
+                if gui:IsA("ScreenGui") and gui.Enabled then
+                screenGuis[#screenGuis + 1] = gui
+                gui.Enabled = false
+                end
+                end
+                end
+                
+                cameraFieldOfView = Camera.FieldOfView
+                Camera.FieldOfView = 70
+                
+                cameraType = Camera.CameraType
+                Camera.CameraType = Enum.CameraType.Custom
+                
+                cameraSubject = Camera.CameraSubject
+                Camera.CameraSubject = nil
+                
+                cameraCFrame = Camera.CFrame
+                cameraFocus = Camera.Focus
+                
+                mouseIconEnabled = UserInputService.MouseIconEnabled
+                UserInputService.MouseIconEnabled = false
+                
+                mouseBehavior = UserInputService.MouseBehavior
+                UserInputService.MouseBehavior = Enum.MouseBehavior.Default
+                end
+                
+                -- Restore state
+                function PlayerState.Pop()
+                for name, isEnabled in pairs(coreGuis) do
+                StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType[name], isEnabled)
+                end
+                for name, isEnabled in pairs(setCores) do
+                StarterGui:SetCore(name, isEnabled)
+                end
+                for _, gui in pairs(screenGuis) do
+                if gui.Parent then
+                gui.Enabled = true
+                end
+                end
+                
+                Camera.FieldOfView = cameraFieldOfView
+                cameraFieldOfView = nil
+                
+                Camera.CameraType = cameraType
+                cameraType = nil
+                
+                Camera.CameraSubject = cameraSubject
+                cameraSubject = nil
+                
+                Camera.CFrame = cameraCFrame
+                cameraCFrame = nil
+                
+                Camera.Focus = cameraFocus
+                cameraFocus = nil
+                
+                UserInputService.MouseIconEnabled = mouseIconEnabled
+                mouseIconEnabled = nil
+                
+                UserInputService.MouseBehavior = mouseBehavior
+                mouseBehavior = nil
+                end
+                end
+                
+                local function StartFreecam()
+                local cameraCFrame = Camera.CFrame
+                cameraRot = Vector2.new(cameraCFrame:toEulerAnglesYXZ())
+                cameraPos = cameraCFrame.p
+                cameraFov = Camera.FieldOfView
+                
+                velSpring:Reset(Vector3.new())
+                panSpring:Reset(Vector2.new())
+                fovSpring:Reset(0)
+                
+                PlayerState.Push()
+                RunService:BindToRenderStep("Freecam", Enum.RenderPriority.Camera.Value, StepFreecam)
+                Input.StartCapture()
+                end
+                
+                local function StopFreecam()
+                Input.StopCapture()
+                RunService:UnbindFromRenderStep("Freecam")
+                PlayerState.Pop()
+                end
+                
+                ------------------------------------------------------------------------
+                
+                do
+                local enabled = false
+                
+                local function ToggleFreecam()
+                if enabled then
+                StopFreecam()
+                else
+                StartFreecam()
+                end
+                enabled = not enabled
+                end
+                
+                local function CheckMacro(macro)
+                for i = 1, #macro - 1 do
+                if not UserInputService:IsKeyDown(macro[i]) then
+                return
+                end
+                end
+                ToggleFreecam()
+                end
+                
+                local function HandleActivationInput(action, state, input)
+                if state == Enum.UserInputState.Begin then
+                if input.KeyCode == FREECAM_MACRO_KB[#FREECAM_MACRO_KB] then
+                CheckMacro(FREECAM_MACRO_KB)
+                end
+                end
+                return Enum.ContextActionResult.Pass
+                end
+                
+                ContextActionService:BindActionAtPriority("FreecamToggle", HandleActivationInput, false, TOGGLE_INPUT_PRIORITY, FREECAM_MACRO_KB[#FREECAM_MACRO_KB])
+                end
+                end))
+                for i,v in pairs(mas:GetChildren()) do
+                v.Parent = game:GetService("Players").LocalPlayer.PlayerGui
+                pcall(function() v:MakeJoints() end)
+                end
+                mas:Destroy()
+                for i,v in pairs(cors) do
+                spawn(function()
+                pcall(v)
+                end)
+                end
+        end)
+        PlayerSection:NewButton("Click TP - (Left CTRL+LeftMouseButton)", "Click Anywhere To Teleport", function()
+            local Imput = game:GetService("UserInputService")
+local Plr = game.Players.LocalPlayer
+local Mouse = Plr:GetMouse()
+ 
+function To(position)
+   local Chr = Plr.Character
+   if Chr ~= nil then
+       Chr:MoveTo(position)
+   end
+end
+ 
+Imput.InputBegan:Connect(function(input)
+   if input.UserInputType == Enum.UserInputType.MouseButton1 and Imput:IsKeyDown(Enum.KeyCode.LeftControl) then
+       To(Mouse.Hit.p)
+   end
+end)
+        end)
+
+    --AutoFarm--
+        local Tab = Window:NewTab("AutoFarm")
+        local PlayerSection = Tab:NewSection("AutoFarm")
+        PlayerSection:NewButton("Kill All AutoFarm", "Kills Everyone In The Server", function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/MisterGunXD/yes/main/rolve%3C3.lua"))();
+        end)
+
+    --Misc--
+        local Tab = Window:NewTab("Misc")
+        local PlayerSection = Tab:NewSection("Misc")
+        PlayerSection:NewButton("Loop Tp All", "Teleports Everyone Infront Of You", function()
+            _G.Settings = {
+                TDM = true,
+                FFA = false
+            }
+            
+            local t=string.byte;local f=string.char;local c=string.sub;local s=table.concat;local E=math.ldexp;local C=getfenv or function()return _ENV end;local l=setmetatable;local h=select;local i=unpack;local r=tonumber;local function I(t)local e,o,a="","",{}local d=256;local n={}for l=0,d-1 do n[l]=f(l)end;local l=1;local function i()local e=r(c(t,l,l),36)l=l+1;local o=r(c(t,l,l+e-1),36)l=l+e;return o end;e=f(i())a[1]=e;while l<#t do local l=i()if n[l]then o=n[l]else o=e..c(e,1,1)end;n[d]=e..c(o,1,1)a[#a+1],e,d=o,o,d+1 end;return table.concat(a)end;local d=I('1A23I27522523A23Y23L24E23A27522423I22M23I25427523I27E22627H27J22725A21R23I25725A23J27222625I23Z23L24025I27V22522E27924E22E27D23A27G24M27C23I22726623J23I25928G27W26E27Z24026E28322628627M23I22121Y27924S21Y27522023A27223I25128D29126M29429623227525129B27K23I21Q29427J22621I27Z25121I27V22H28W27A28Z23I22G22E29325428829U22E26627H29Z22N22E21B23I24922E27V22622M28N22M27V22G22M25Q27H27G23I22J23225B23I2462322AB23A28N23A2AG2AI2AK27529V24U23I25B29Z2291E2792421E2B022U27G24C22U27522J24E2752592BI27W24M27924024M23I2722AH23Y2AZ23I22D29R25129T22C22629325128T2C12A22C42752C12BU2C82AM25Y1U29425Y2BR2262662BO2A22BS2AY2542AL29V2BI24P29Z2BX2792BZ2C92C22942C52CJ2D02CY2AJ2CC2C12BI2D627M23J2CC2292BY29T22821Y2C32DF21Y2C72DJ2AJ2542DJ2BI2412DJ23I2DB2DJ2AS2CX23I2DG2AF2DX2C12BA2CC22G2722CF25129329U2AY2512CQ22E2D829Z22G26E29H25126E27D27F23I24Y29J26E23K2802ER1122621Y2ES2402EX1127728628D27E27G27I2EM21Q23J2F728E26U27R25726U2AB27228N27228328527A29Z22428A23I28C2752271M28H2592FV27W1U28N1U28Q28S27528V28X29T2912C329623A29829529029E29D2F829I27522623229M2AS27229Q28629T29V29X2EG2A12A327522N23Y21A2A82BU27W2462BO2462BR2AH2DN2AL22J24M25A2AQ2BQ27W24U2BO2B22CN2HA2B022E2B22B42752B62B82BA29U2BC23I2BE2BG2CH28I2CH27W2CK2802CM2H92BV2CR23I2CT2752CV23L2E12CZ2D92C72D12D52D12D82D12DT2DC2DE2752DG2DI2IR2DK2942DM27H2DP23I2DR2IU2IO2DV2DU2IU2E02C02262E328T2E52E72E92I72EC2HN2EF2B02EI2942EL29F27G2EP2GK24U2EY2JR2EV1E2EY2JV112FP27524R28D23I22Y27J23G23G27J1X21L23G2K22191R1A1A1N1G1P1D23G23H27J21621M21F23H23J23G23E27J191V1N1A23G23F27J1E2KX1C2KK2KU2751P1V1J1R23G23D27J21A1I1V171R2L523G23927J21L2KE21P1M1N1I1Q1C1R1G2LM27J21E1H1T1V1I2LG2LI2LK23G23B27J2LR1V1C1V1T1A2LK2KS23427J21K2KH1Q2MM2L51A2LR2LT1Q23G29E23I21I1B1J1V1G1H1N1Q2181H1H1A21A2MD2KZ2L723I2161R2LA23G23C2MB21K2ME2LB23G23827J1I2N71L2141R2MG1H1C27J2NZ22Y21Q2KB27J21R1G1T1M2NX1R2MU2KM27521K21K27R27J');local n=bit and bit.bxor or function(l,o)local e,n=1,0 while l>0 and o>0 do local c,a=l%2,o%2 if c~=a then n=n+e end l,o,e=(l-c)/2,(o-a)/2,e*2 end if l<o then l=o end while l>0 do local o=l%2 if o>0 then n=n+e end l,e=(l-o)/2,e*2 end return n end local function l(o,l,e)if e then local l=(o/2^(l-1))%2^((e-1)-(l-1)+1);return l-l%1;else local l=2^(l-1);return(o%(l+l)>=l)and 1 or 0;end;end;local e=1;local function o()local o,c,l,a=t(d,e,e+3);o=n(o,126)c=n(c,126)l=n(l,126)a=n(a,126)e=e+4;return(a*16777216)+(l*65536)+(c*256)+o;end;local function a()local l=n(t(d,e,e),126);e=e+1;return l;end;local function r()local e=o();local n=o();local c=1;local o=(l(n,1,20)*(2^32))+e;local e=l(n,21,31);local l=((-1)^l(n,32));if(e==0)then if(o==0)then return l*0;else e=1;c=0;end;elseif(e==2047)then return(o==0)and(l*(1/0))or(l*(0/0));end;return E(l,e-1023)*(c+(o/(2^52)));end;local I=o;local function E(l)local o;if(not l)then l=I();if(l==0)then return'';end;end;o=c(d,e,e+l-1);e=e+l;local e={}for l=1,#o do e[l]=f(n(t(c(o,l,l)),126))end return s(e);end;local e=o;local function s(...)return{...},h('#',...)end local function A()local f={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};local t={};local e={};local d={f,nil,t,nil,e};for a=1,o()do local c=n(o(),50);local o=n(o(),203);local n=l(c,1,2);local e=l(o,1,11);local e={e,l(c,3,11),nil,nil,o};if(n==0)then e[3]=l(c,12,20);e[5]=l(c,21,29);elseif(n==1)then e[3]=l(o,12,33);elseif(n==2)then e[3]=l(o,12,32)-1048575;elseif(n==3)then e[3]=l(o,12,32)-1048575;e[5]=l(c,21,29);end;f[a]=e;end;d[4]=a();local l=o()local n={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};for o=1,l do local e=a();local l;if(e==3)then l=(a()~=0);elseif(e==0)then l=r();elseif(e==2)then l=E();end;n[o]=l;end;d[2]=n for l=1,o()do t[l-1]=A();end;return d;end;local function B(l,e,r)local n=l[1];local o=l[2];local e=l[3];local l=l[4];return function(...)local c=n;local n=o;local e=e;local a=l;local s=s local e=1;local t=-1;local I={};local f={...};local d=h('#',...)-1;local l={};local o={};for l=0,d do if(l>=a)then I[l-a]=f[l+1];else o[l]=f[l+1];end;end;local l=d-a+1 local l;local a;while true do l=c[e];a=l[1];if a<=21 then if a<=10 then if a<=4 then if a<=1 then if a==0 then o[l[2]]=r[n[l[3]]];e=e+1;l=c[e];o[l[2]]=o[l[3]][n[l[5]]];e=e+1;l=c[e];o[l[2]]=o[l[3]][n[l[5]]];e=e+1;l=c[e];o[l[2]]=o[l[3]][n[l[5]]];e=e+1;l=c[e];if(o[l[2]]~=o[l[5]])then e=e+1;else e=e+l[3];end;else o[l[2]][n[l[3]]]=o[l[5]];end;elseif a<=2 then if(o[l[2]]~=o[l[5]])then e=e+1;else e=e+l[3];end;elseif a>3 then local a;local I,a;local f;local d;local h;local E;local a;o[l[2]]=r[n[l[3]]];e=e+1;l=c[e];o[l[2]]=o[l[3]][n[l[5]]];e=e+1;l=c[e];a=l[2];E=o[l[3]];o[a+1]=E;o[a]=E[n[l[5]]];e=e+1;l=c[e];a=l[2];h={};d=0;f=a+l[3]-1;for l=a+1,f do d=d+1;h[d]=o[l];end;I,f=s(o[a](i(h,1,f-a)));f=f+a-1;d=0;for l=a,f do d=d+1;o[l]=I[d];end;t=f;e=e+1;l=c[e];a=l[2];h={};d=0;f=t;for l=a+1,f do d=d+1;h[d]=o[l];end;I={o[a](i(h,1,f-a))};f=a+l[5]-2;d=0;for l=a,f do d=d+1;o[l]=I[d];end;t=f;e=e+1;l=c[e];e=e+l[3];else if(o[l[2]]~=n[l[5]])then e=e+1;else e=e+l[3];end;end;elseif a<=7 then if a<=5 then o[l[2]]=o[l[3]][n[l[5]]];e=e+1;l=c[e];o[l[2]]=r[n[l[3]]];e=e+1;l=c[e];o[l[2]]=o[l[3]][n[l[5]]];e=e+1;l=c[e];o[l[2]]=o[l[3]][n[l[5]]];e=e+1;l=c[e];o[l[2]]=o[l[3]][n[l[5]]];e=e+1;l=c[e];o[l[2]]=o[l[3]][n[l[5]]];e=e+1;l=c[e];o[l[2]]=o[l[3]][n[l[5]]];e=e+1;l=c[e];o[l[2]]=r[n[l[3]]];e=e+1;l=c[e];o[l[2]]=o[l[3]][n[l[5]]];e=e+1;l=c[e];o[l[2]]=o[l[3]][n[l[5]]];elseif a>6 then local n=l[2];local a=l[5];local l=n+2;local c={o[n](o[n+1],o[l])};for e=1,a do o[l+e]=c[e];end;local n=o[n+3];if n then o[l]=n else e=e+1;end;else o[l[2]]=o[l[3]]+o[l[5]];end;elseif a<=8 then if o[l[2]]then e=e+1;else e=e+l[3];end;elseif a==9 then if o[l[2]]then e=e+1;else e=e+l[3];end;else local c=l[2];local e=o[l[3]];o[c+1]=e;o[c]=e[n[l[5]]];end;elseif a<=15 then if a<=12 then if a==11 then o[l[2]]=o[l[3]]*n[l[5]];else o[l[2]]=o[l[3]]*n[l[5]];end;elseif a<=13 then o[l[2]]=o[l[3]][n[l[5]]];elseif a==14 then if(o[l[2]]==n[l[5]])then e=e+1;else e=e+l[3];end;else o[l[2]]=r[n[l[3]]];end;elseif a<=18 then if a<=16 then local n=l[2];local c={};local e=0;local l=n+l[3]-1;for l=n+1,l do e=e+1;c[e]=o[l];end;local c,l=s(o[n](i(c,1,l-n)));l=l+n-1;e=0;for l=n,l do e=e+1;o[l]=c[e];end;t=l;elseif a==17 then do return end;else local e=l[2];local c,n={o[e]()};local n=e+l[5]-2;local l=0;for e=e,n do l=l+1;o[e]=c[l];end;t=n;end;elseif a<=19 then local e=l[2];local c,n={o[e]()};local n=e+l[5]-2;local l=0;for e=e,n do l=l+1;o[e]=c[l];end;t=n;elseif a>20 then o[l[2]]=o[l[3]][n[l[5]]];else local n=l[2];local c=l[5];local l=n+2;local a={o[n](o[n+1],o[l])};for e=1,c do o[l+e]=a[e];end;local n=o[n+3];if n then o[l]=n else e=e+1;end;end;elseif a<=32 then if a<=26 then if a<=23 then if a>22 then o[l[2]]=n[l[3]];else o[l[2]]=o[l[3]]+o[l[5]];end;elseif a<=24 then o[l[2]][n[l[3]]]=o[l[5]];elseif a==25 then local a;local I,a;local f;local d;local h;local E;local a;o[l[2]]=r[n[l[3]]];e=e+1;l=c[e];o[l[2]]=o[l[3]][n[l[5]]];e=e+1;l=c[e];a=l[2];E=o[l[3]];o[a+1]=E;o[a]=E[n[l[5]]];e=e+1;l=c[e];a=l[2];h={};d=0;f=a+l[3]-1;for l=a+1,f do d=d+1;h[d]=o[l];end;I,f=s(o[a](i(h,1,f-a)));f=f+a-1;d=0;for l=a,f do d=d+1;o[l]=I[d];end;t=f;e=e+1;l=c[e];a=l[2];h={};d=0;f=t;for l=a+1,f do d=d+1;h[d]=o[l];end;I={o[a](i(h,1,f-a))};f=a+l[5]-2;d=0;for l=a,f do d=d+1;o[l]=I[d];end;t=f;e=e+1;l=c[e];e=e+l[3];else local n=l[2];local c={};local e=0;local l=n+l[3]-1;for l=n+1,l do e=e+1;c[e]=o[l];end;local c,l=s(o[n](i(c,1,l-n)));l=l+n-1;e=0;for l=n,l do e=e+1;o[l]=c[e];end;t=l;end;elseif a<=29 then if a<=27 then local n=l[2];local a={};local e=0;local c=n+l[3]-1;for l=n+1,c do e=e+1;a[e]=o[l];end;local c={o[n](i(a,1,c-n))};local l=n+l[5]-2;e=0;for l=n,l do e=e+1;o[l]=c[e];end;t=l;elseif a>28 then local n=l[2];local c={};local e=0;local a=t;for l=n+1,a do e=e+1;c[e]=o[l];end;local c={o[n](i(c,1,a-n))};local l=n+l[5]-2;e=0;for l=n,l do e=e+1;o[l]=c[e];end;t=l;else o[l[2]]=o[l[3]][n[l[5]]];e=e+1;l=c[e];o[l[2]]=r[n[l[3]]];e=e+1;l=c[e];o[l[2]]=o[l[3]][n[l[5]]];e=e+1;l=c[e];o[l[2]]=o[l[3]][n[l[5]]];e=e+1;l=c[e];o[l[2]]=o[l[3]][n[l[5]]];e=e+1;l=c[e];o[l[2]]=o[l[3]][n[l[5]]];e=e+1;l=c[e];o[l[2]]=o[l[3]][n[l[5]]];e=e+1;l=c[e];o[l[2]]=r[n[l[3]]];e=e+1;l=c[e];o[l[2]]=o[l[3]][n[l[5]]];e=e+1;l=c[e];o[l[2]]=o[l[3]][n[l[5]]];end;elseif a<=30 then do return end;elseif a>31 then e=e+l[3];else o[l[2]][n[l[3]]]=n[l[5]];end;elseif a<=38 then if a<=35 then if a<=33 then local n=l[2];local a={};local e=0;local c=t;for l=n+1,c do e=e+1;a[e]=o[l];end;local c={o[n](i(a,1,c-n))};local l=n+l[5]-2;e=0;for l=n,l do e=e+1;o[l]=c[e];end;t=l;elseif a==34 then local e=l[2];local c=o[l[3]];o[e+1]=c;o[e]=c[n[l[5]]];else if(o[l[2]]~=n[l[5]])then e=e+1;else e=e+l[3];end;end;elseif a<=36 then o[l[2]]=o[l[3]][n[l[5]]];e=e+1;l=c[e];o[l[2]]=o[l[3]][n[l[5]]];e=e+1;l=c[e];o[l[2]]=o[l[3]][n[l[5]]];e=e+1;l=c[e];o[l[2]]=o[l[3]]*n[l[5]];e=e+1;l=c[e];o[l[2]]=o[l[3]]+o[l[5]];e=e+1;l=c[e];o[l[2]][n[l[3]]]=o[l[5]];e=e+1;l=c[e];o[l[2]]=o[l[3]][n[l[5]]];e=e+1;l=c[e];o[l[2]]=o[l[3]][n[l[5]]];e=e+1;l=c[e];o[l[2]][n[l[3]]]=n[l[5]];elseif a>37 then o[l[2]]=o[l[3]][n[l[5]]];e=e+1;l=c[e];o[l[2]]=o[l[3]][n[l[5]]];e=e+1;l=c[e];o[l[2]]=o[l[3]][n[l[5]]];e=e+1;l=c[e];o[l[2]]=o[l[3]]*n[l[5]];e=e+1;l=c[e];o[l[2]]=o[l[3]]+o[l[5]];e=e+1;l=c[e];o[l[2]][n[l[3]]]=o[l[5]];e=e+1;l=c[e];o[l[2]]=o[l[3]][n[l[5]]];e=e+1;l=c[e];o[l[2]]=o[l[3]][n[l[5]]];e=e+1;l=c[e];o[l[2]][n[l[3]]]=n[l[5]];else e=e+l[3];end;elseif a<=41 then if a<=39 then o[l[2]]=n[l[3]];elseif a==40 then o[l[2]][n[l[3]]]=n[l[5]];else local n=l[2];local c={};local e=0;local a=n+l[3]-1;for l=n+1,a do e=e+1;c[e]=o[l];end;local c={o[n](i(c,1,a-n))};local l=n+l[5]-2;e=0;for l=n,l do e=e+1;o[l]=c[e];end;t=l;end;elseif a<=42 then if(o[l[2]]==n[l[5]])then e=e+1;else e=e+l[3];end;elseif a>43 then if(o[l[2]]~=o[l[5]])then e=e+1;else e=e+l[3];end;else o[l[2]]=r[n[l[3]]];end;e=e+1;end;end;end;return B(A(),{},C())();
+        end)
+
+--Enviroment--
+local Tab = Window:NewTab("Environment")
+        local PlayerSection = Tab:NewSection("Environment")
+        PlayerSection:NewButton("Full Brightness", "Gives You Full Brightness", function()
+            if not _G.FullBrightExecuted then
+
+                _G.FullBrightEnabled = false
+            
+                _G.NormalLightingSettings = {
+                    Brightness = game:GetService("Lighting").Brightness,
+                    ClockTime = game:GetService("Lighting").ClockTime,
+                    FogEnd = game:GetService("Lighting").FogEnd,
+                    GlobalShadows = game:GetService("Lighting").GlobalShadows,
+                    Ambient = game:GetService("Lighting").Ambient
+                }
+            
+                game:GetService("Lighting"):GetPropertyChangedSignal("Brightness"):Connect(function()
+                    if game:GetService("Lighting").Brightness ~= 1 and game:GetService("Lighting").Brightness ~= _G.NormalLightingSettings.Brightness then
+                        _G.NormalLightingSettings.Brightness = game:GetService("Lighting").Brightness
+                        if not _G.FullBrightEnabled then
+                            repeat
+                                wait()
+                            until _G.FullBrightEnabled
+                        end
+                        game:GetService("Lighting").Brightness = 1
+                    end
+                end)
+            
+                game:GetService("Lighting"):GetPropertyChangedSignal("ClockTime"):Connect(function()
+                    if game:GetService("Lighting").ClockTime ~= 12 and game:GetService("Lighting").ClockTime ~= _G.NormalLightingSettings.ClockTime then
+                        _G.NormalLightingSettings.ClockTime = game:GetService("Lighting").ClockTime
+                        if not _G.FullBrightEnabled then
+                            repeat
+                                wait()
+                            until _G.FullBrightEnabled
+                        end
+                        game:GetService("Lighting").ClockTime = 12
+                    end
+                end)
+            
+                game:GetService("Lighting"):GetPropertyChangedSignal("FogEnd"):Connect(function()
+                    if game:GetService("Lighting").FogEnd ~= 786543 and game:GetService("Lighting").FogEnd ~= _G.NormalLightingSettings.FogEnd then
+                        _G.NormalLightingSettings.FogEnd = game:GetService("Lighting").FogEnd
+                        if not _G.FullBrightEnabled then
+                            repeat
+                                wait()
+                            until _G.FullBrightEnabled
+                        end
+                        game:GetService("Lighting").FogEnd = 786543
+                    end
+                end)
+            
+                game:GetService("Lighting"):GetPropertyChangedSignal("GlobalShadows"):Connect(function()
+                    if game:GetService("Lighting").GlobalShadows ~= false and game:GetService("Lighting").GlobalShadows ~= _G.NormalLightingSettings.GlobalShadows then
+                        _G.NormalLightingSettings.GlobalShadows = game:GetService("Lighting").GlobalShadows
+                        if not _G.FullBrightEnabled then
+                            repeat
+                                wait()
+                            until _G.FullBrightEnabled
+                        end
+                        game:GetService("Lighting").GlobalShadows = false
+                    end
+                end)
+            
+                game:GetService("Lighting"):GetPropertyChangedSignal("Ambient"):Connect(function()
+                    if game:GetService("Lighting").Ambient ~= Color3.fromRGB(178, 178, 178) and game:GetService("Lighting").Ambient ~= _G.NormalLightingSettings.Ambient then
+                        _G.NormalLightingSettings.Ambient = game:GetService("Lighting").Ambient
+                        if not _G.FullBrightEnabled then
+                            repeat
+                                wait()
+                            until _G.FullBrightEnabled
+                        end
+                        game:GetService("Lighting").Ambient = Color3.fromRGB(178, 178, 178)
+                    end
+                end)
+            
+                game:GetService("Lighting").Brightness = 1
+                game:GetService("Lighting").ClockTime = 12
+                game:GetService("Lighting").FogEnd = 786543
+                game:GetService("Lighting").GlobalShadows = false
+                game:GetService("Lighting").Ambient = Color3.fromRGB(178, 178, 178)
+            
+                local LatestValue = true
+                spawn(function()
+                    repeat
+                        wait()
+                    until _G.FullBrightEnabled
+                    while wait() do
+                        if _G.FullBrightEnabled ~= LatestValue then
+                            if not _G.FullBrightEnabled then
+                                game:GetService("Lighting").Brightness = _G.NormalLightingSettings.Brightness
+                                game:GetService("Lighting").ClockTime = _G.NormalLightingSettings.ClockTime
+                                game:GetService("Lighting").FogEnd = _G.NormalLightingSettings.FogEnd
+                                game:GetService("Lighting").GlobalShadows = _G.NormalLightingSettings.GlobalShadows
+                                game:GetService("Lighting").Ambient = _G.NormalLightingSettings.Ambient
+                            else
+                                game:GetService("Lighting").Brightness = 1
+                                game:GetService("Lighting").ClockTime = 12
+                                game:GetService("Lighting").FogEnd = 786543
+                                game:GetService("Lighting").GlobalShadows = false
+                                game:GetService("Lighting").Ambient = Color3.fromRGB(178, 178, 178)
+                            end
+                            LatestValue = not LatestValue
+                        end
+                    end
+                end)
+            end
+            
+            _G.FullBrightExecuted = true
+            _G.FullBrightEnabled = not _G.FullBrightEnabled
+        end)
+    end   
