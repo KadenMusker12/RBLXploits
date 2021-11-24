@@ -176,13 +176,6 @@ function lib:Main()
 		TextSize = 18.000,
 	})
 
-	main.Close.MouseEnter:Connect(function()
-		TweenService:Create(main.CloseFrame, TweenInfo.new(0.1), {ImageTransparency = 0}):Play()
-	end)
-
-	main.Close.MouseLeave:Connect(function()
-		TweenService:Create(main.CloseFrame, TweenInfo.new(0.1), {ImageTransparency = 1}):Play()
-	end)
 
 	main.CategoryContainer = lib:Create("ScrollingFrame", {
 		Name = "CategoryContainer",
@@ -1524,7 +1517,7 @@ function lib:Main()
 	end
 
 	main.Close.MouseButton1Click:Connect(function()
-		game.Players.LocalPlayer.PlayerGui.Ancestor:Destroy()
+		game.Players.LocalPlayer.PlayerGui.Aspect:Destroy()
 	end)
 
 	main.ScreenGui.Parent = game.Players.LocalPlayer.PlayerGui
