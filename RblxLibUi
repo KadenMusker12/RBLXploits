@@ -1489,7 +1489,7 @@ function lib:Main()
 	end
 
 	main.Close.MouseButton1Click:Connect(function()
-		game.Players.LocalPlayer.PlayerGui.Ancestor:Destroy()
+		game.Players.LocalPlayer.PlayerGui.AspectX:Destroy()
 	end)
 
 	main.ScreenGui.Parent = game.Players.LocalPlayer.PlayerGui
