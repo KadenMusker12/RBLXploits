@@ -1,6 +1,6 @@
 local lib = {}
-if game.Players.LocalPlayer.PlayerGui:FindFirstChild'AspectX'then 
-    game.Players.LocalPlayer.PlayerGui.AspectX:Destroy()
+if game.Players.LocalPlayer.PlayerGui:FindFirstChild'Aspect'then 
+    game.Players.LocalPlayer.PlayerGui.Aspect:Destroy()
 end
 
 function lib:Create(type, proprieties)
@@ -25,13 +25,13 @@ function lib:Main()
 	local firstC = true
 
 	main.ScreenGui = lib:Create("ScreenGui", {
-		Name = "AspectX",
+		Name = "Aspect",
 		ResetOnSpawn = false,
 	})
 
 	main.MainBody = lib:Create("Frame", {
 		Name = "MainBody",
-		BackgroundColor3 = Color3.fromRGB(10, 10, 10),
+		BackgroundColor3 = Color3.fromRGB(0, 0, 0),
 		BorderSizePixel = 0,
 		Position = UDim2.new(0.355343342, 0, 0.358804077, 0),
 		Size = UDim2.new(0, 554, 0, 304),
@@ -70,13 +70,13 @@ function lib:Main()
 
 	main.TopBar = lib:Create("Frame", {
 		Name = "TopBar",
-		BackgroundColor3 = Color3.fromRGB(255, 0, 0),
+		BackgroundColor3 = Color3.fromRGB(0, 0, 255),
 		BorderSizePixel = 0,
 		Size = UDim2.new(0, 554, 0, 40),
 	})
 
 	main.TopBarGradient = lib:Create("UIGradient", {
-		Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 0, 0)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 0, 0))},
+		Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(0, 0, 255)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 0, 255))},
 		Rotation = 90,
 	})
 
@@ -148,6 +148,41 @@ function lib:Main()
 		TextSize = 20.000,
 		TextXAlignment = Enum.TextXAlignment.Left
 	})
+
+	main.CloseFrame = lib:Create("ImageLabel", {
+		Name = "CloseFrame",
+		BackgroundColor3 = Color3.fromRGB(255, 255, 255),
+		BackgroundTransparency = 1.000,
+		Position = UDim2.new(0.958662987, 0, 0.250000001, 0),
+		Size = UDim2.new(0, 15, 0, 15),
+		Image = "rbxassetid://3570695787",
+		ImageColor3 = Color3.fromRGB(255, 0, 4),
+		ScaleType = Enum.ScaleType.Slice,
+		SliceCenter = Rect.new(100, 100, 100, 100),
+		SliceScale = 0.120,
+		ImageTransparency = 1,
+	})
+
+	main.Close = lib:Create("TextButton", {
+		Name = "Close",
+		BackgroundColor3 = Color3.fromRGB(255, 255, 255),
+		BackgroundTransparency = 1.000,
+		BorderSizePixel = 0,
+		Position = UDim2.new(0, 0, -0.466666669, 0),
+		Size = UDim2.new(0, 15, 0, 25),
+		Font = Enum.Font.GothamSemibold,
+		Text = "X",
+		TextColor3 = Color3.fromRGB(255, 255, 255),
+		TextSize = 18.000,
+	})
+
+	main.Close.MouseEnter:Connect(function()
+		TweenService:Create(main.CloseFrame, TweenInfo.new(0.1), {ImageTransparency = 0}):Play()
+	end)
+
+	main.Close.MouseLeave:Connect(function()
+		TweenService:Create(main.CloseFrame, TweenInfo.new(0.1), {ImageTransparency = 1}):Play()
+	end)
 
 	main.CategoryContainer = lib:Create("ScrollingFrame", {
 		Name = "CategoryContainer",
@@ -1489,7 +1524,7 @@ function lib:Main()
 	end
 
 	main.Close.MouseButton1Click:Connect(function()
-		game.Players.LocalPlayer.PlayerGui.AspectX:Destroy()
+		game.Players.LocalPlayer.PlayerGui.Ancestor:Destroy()
 	end)
 
 	main.ScreenGui.Parent = game.Players.LocalPlayer.PlayerGui
